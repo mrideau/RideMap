@@ -1,0 +1,101 @@
+$utilities: (
+    'text-align': (
+        responsive: false,
+        property: text-align,
+        class: text,
+        values: (
+            left: left,
+            right: right,
+            center: center,
+        ),
+    ),
+    'max-width': (
+        responsive: true,
+        property: max-width,
+        class: max-width,
+        values: (
+            25: 25%,
+            50: 50%,
+            75: 75%,
+        ),
+    ),
+    'justify-content': (
+        responsive: true,
+        property: justify-content,
+        values: (
+            start: flex-start,
+            end: flex-end,
+            center: center,
+            between: space-between,
+            around: space-around,
+            evenly: space-evenly,
+        ),
+    ),
+    'align-items': (
+        responsive: true,
+        property: align-items,
+        values: (
+            start: flex-start,
+            end: flex-end,
+            center: center,
+            revert: revert,
+            stretch: stretch,
+        ),
+    ),
+    'color': (
+        property: 'color',
+        values: (
+            primary: var(--color-primary),
+            danger: red,
+            success: green
+        )
+    ),
+    'background-color': (
+        property: background-color,
+        values: (
+            primary: var(--color-primary),
+            light: var(--bg-white)
+        ),
+    ),
+    'float': (
+        property: float,
+        values: (
+            left: left,
+            right: right
+        )
+    ),
+    'display': (
+        property: display,
+        class: d,
+        values: (
+            none: none,
+            block: block,
+        )
+    )
+);
+
+@each $breakpoint in map-keys($grid-breakpoints) {
+    $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
+
+    @each $key, $utility in $utilities {
+        @if (map-get($utility, responsive) or $infix == '') {
+            $properties: map-get($utility, property);
+            $values: map-get($utility, values);
+
+            @each $key, $value in $values {
+                $property-class: if(
+                    map-has-key($utility, class),
+                    map-get($utility, class),
+                    nth($properties, 1)
+                );
+                $property-modifier: if($key, '-#{$key}', '');
+
+                .#{$property-class + $infix + $property-modifier} {
+                    @each $property in $properties {
+                        #{$property}: $value;
+                    }
+                }
+            }
+        }
+    }
+}

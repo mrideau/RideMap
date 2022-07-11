@@ -1,0 +1,56 @@
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--gutter-x);
+
+    > * {
+        width: 100%;
+        max-width: 100%;
+        // margin-top: var(--gutter-y);
+
+        // &:first-child {
+        //     padding-right: var(--gutter-x);
+        // }
+
+        // &:last-child {
+        //     padding-left: var(--gutter-x);
+        // }
+
+        // &:not(:first-child, :last-child) {
+        //     padding-left: var(--gutter-x);
+        //     padding-right: var(--gutter-x);
+        //     background-color: red
+        // }
+    }
+}
+
+// @include make-grid-columns();
+
+.grid {
+    display: grid !important;
+    gap: var(--gutter-x);
+    //grid-template-columns: 1fr;
+    grid-auto-columns: auto;
+
+    > * {
+        flex: 1;
+    }
+}
+
+@each $breakpoint in map-keys($grid-breakpoints) {
+    $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
+    @include media-breakpoint-up($breakpoint, $grid-breakpoints) {
+        .column#{$infix}-auto {
+            grid-column-end: auto;
+        }
+        @for $i from 1 to 6 {
+            .grid#{$infix}-#{$i} {
+                grid-template-columns: repeat($i, 1fr);
+            }
+
+            .column#{$infix}-#{$i} {
+                grid-column-end: span #{$i};
+            }
+        }
+    }
+}

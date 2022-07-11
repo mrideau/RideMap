@@ -1,0 +1,29 @@
+/* Column calculation */
+@mixin make-col($size: false, $columns: $grid-columns) {
+    @if $size {
+        flex: 0 0 auto;
+        width: percentage(($size /$columns));
+    } @else {
+        flex: 1 1 auto;
+        max-width: 100%;
+    }
+}
+
+/* Generate all the columns */
+@mixin make-grid-columns($breakpoints: $grid-breakpoints) {
+    @each $breakpoint in map-keys($breakpoints) {
+        $infix: breakpoint-infix($breakpoint, $breakpoints);
+
+        @include media-breakpoint-up($breakpoint, $breakpoints) {
+            .col#{$infix} {
+                flex: 1 0 0%;
+            }
+
+            @for $i from 1 to $grid-columns {
+                .col#{$infix}-#{$i} {
+                    @include make-col($i);
+                }
+            }
+        }
+    }
+}

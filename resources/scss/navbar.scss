@@ -1,0 +1,21 @@
+.navbar {
+    color: inherit;
+}
+
+.nav-menu {
+    display: flex;
+    gap: 1rem;
+    color: inherit;
+}
+
+.nav-item {
+    color: inherit;
+}
+
+.nav-link {
+    color: inherit;
+
+    &.active {
+        color: var(--color-primary);
+    }
+}

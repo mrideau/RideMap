@@ -1,0 +1,51 @@
+*, html, p {
+    font-family: 'Rubik', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 600;
+}
+
+h1 {
+    font-size: 2.25rem;
+}
+
+h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+}
+
+h3 {
+    font-size: 1.25rem;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+}
+
+p {
+    font-size: 0.9rem;
+    line-height: 1.2rem;
+}
+
+a {
+    font-family: 'Rubik';
+    font-size: inherit;
+}
+
+.section-title {
+    text-align: center;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    margin-top: 2rem;
+}
+
+.section-description {
+    color: var(--text-light);
+    text-align: center;
+    word-spacing: 150%;
+    line-height: 150%;
+    padding: 0 15%;
+    margin-bottom: 2rem;
+    font-size: 0.9rem;
+}

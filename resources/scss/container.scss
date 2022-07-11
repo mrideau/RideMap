@@ -1,0 +1,13 @@
+.container-full {
+    max-width: 100%;
+    padding: 30px;
+}
+
+.container {
+    display: block;
+    max-width: calc(100% - 100px);
+    min-height: 100%;
+    padding: 1.5rem;
+    margin: 50px auto;
+    background-color: var(--bg-white);
+}
