@@ -36,7 +36,7 @@
                 <input class="form-input" type="text" id="object">
                 <label class="form-label required" for="message">Message</label>
                 <textarea class="form-input" name="" id="" cols="30" rows="10"></textarea>
-                <input class="btn" type="submit" value="Envoyer">
+                <input class="btn btn-primary float-right" type="submit" value="Envoyer">
             </form>
         </div>
     </div>

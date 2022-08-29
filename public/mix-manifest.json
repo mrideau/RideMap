@@ -1,6 +1,6 @@
 {
     "/js/app.js": "/js/app.js",
     "/js/map.js": "/js/map.js",
-    "/js/map-selector.js": "/js/map-selector.js",
+    "/js/admin/skatepark_edit.js": "/js/admin/skatepark_edit.js",
     "/css/app.css": "/css/app.css"
 }

@@ -3,16 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Models\Event;
-use App\Models\SkateParc;
+use App\Models\SkatePark;
 use Illuminate\Http\Request;
 
 class MapController extends Controller
 {
     public function index() {
+        $skateparks = SkatePark::all(['title', 'slug', 'city', 'coordinates'])->all();
 
-        return view('map', [
-            'events' => Event::all(['title', 'city', 'coordinates']),
-            'skateparcs' => SkateParc::all(['title', 'city', 'coordinates'])
-        ]);
+        foreach ($skateparks as $skatepark) {
+            $skatepark->image = $skatepark->getFirstMediaUrl('image');
+        }
+
+        return view('map', compact('skateparks'));
     }
 }

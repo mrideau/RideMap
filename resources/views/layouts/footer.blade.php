@@ -2,13 +2,10 @@
     <nav class="navbar">
         <ul class="nav-menu">
             <li class="nav-item">
-                <a href="" class="nav-link">Accueil</a>
+                <a href="{{ url('/') }}" class="nav-link">Accueil</a>
             </li>
             <li class="nav-item">
-                <a href="" class="nav-link">Skate Parcs</a>
-            </li>
-            <li class="nav-item">
-                <a href="" class="nav-link">Évènements</a>
+                <a href="{{ url('/carte') }}" class="nav-link">Skate Parcs</a>
             </li>
         </ul>
     </nav>

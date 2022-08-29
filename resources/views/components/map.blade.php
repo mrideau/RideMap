@@ -16,4 +16,4 @@
     @endpush
 @endif
 
-<div id="{{ $name }}"></div>
+<div {{ $attributes }} id="{{ $name }}"></div>

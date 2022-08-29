@@ -1,13 +1,17 @@
 .btn {
     font-family: 'Barlow Condensed';
     font-weight: 400;
-    @extend .corner-small;
+    @extend .border-small;
     padding: 10px 30px;
     position: relative;
     text-transform: uppercase;
     cursor: pointer;
     background-color: transparent;
     border: none;
+
+    > * {
+        color: inherit;
+    }
 }
 
 .btn-small {
@@ -30,7 +34,8 @@
 
     &::before {
         content: '';
-        @extend .corner-small;
+        //@extend .border-small;
+        border-radius: var(--border-radius);
         position: absolute;
         top: 0;
         left: 0;

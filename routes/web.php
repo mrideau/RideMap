@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\SkateParcController;
+use App\Http\Controllers\SkateParkController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,24 +22,23 @@ Route::get('/contact', function () {
 
 Route::get('/carte', [\App\Http\Controllers\MapController::class, 'index'])->name('map');
 
-Route::get('/skateparcs/{skateparc:slug}', [SkateParcController::class, 'show'])->name('skate-parcs.show');
+Route::get('/skateparks/{skatepark:slug}', [SkateParkController::class, 'show'])->name('skateparks.show');
 
 // Admin Dashboard //
 Route::group([
-    'prefix' => 'admin',
-    'middleware' => 'auth',
-//    'except' => ['show']
+    'prefix' => 'admin', // Prefixer "admin" aux vues
+    'middleware' => 'auth', // Utilisation du middleware "auth" pour valider l'authentification de l'utilisateur
 ], function() {
     Route::get('/', function () {
         return view('admin.dashboard');
     })->name('admin.dashboard');
-    Route::controller(SkateParcController::class)->group(function() {
-        Route::get('/skateparcs', 'index')->name('skate-parcs.index');
-        Route::post('/skateparcs', 'store')->name('skate-parcs.store');
-        Route::get('/skateparcs/create', 'create')->name('skate-parcs.create');
-        Route::patch('/skateparcs/{skateparc:slug}', 'update')->name('skate-parcs.update');
-        Route::get('/skateparcs/{skateparc:slug}/edit', 'edit')->name('skate-parcs.edit');
-        Route::delete('/skateparcs/{skateparc:slug}', 'destroy')->name('skate-parcs.destroy');
+    Route::controller(SkateParkController::class)->group(function() {
+        Route::get('/skateparks', 'index')->name('skateparks.index');
+        Route::post('/skateparks', 'store')->name('skateparks.store');
+        Route::get('/skateparks/create', 'create')->name('skateparks.create');
+        Route::patch('/skateparks/{skatepark:slug}', 'update')->name('skateparks.update');
+        Route::get('/skateparks/{skatepark:slug}/edit', 'edit')->name('skateparks.edit');
+        Route::delete('/skateparks/{skatepark:slug}', 'destroy')->name('skateparks.destroy');
     });
 });
 
@@ -51,7 +50,7 @@ Route::group([
 //    Route::get('/', function() {
 //        return view('admin.dashboard');
 //    })->name('admin');
-//    Route::resource('/skate-parcs', SkateParcController::class)->only('index', 'store', 'create', 'edit', 'update');
+//    Route::resource('/skateparks', SkateParkController::class)->only('index', 'store', 'create', 'edit', 'update');
 //});
 
 // Auth //

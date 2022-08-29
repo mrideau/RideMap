@@ -11,8 +11,5 @@
                 <a class="nav-link {{ request()->is('contact') ? 'active' : '' }}" href="{{ url('/contact') }}">Contact</a>
             </li>
         </ul>
-        @auth()
-            <a href="{{ route('login.logout') }}">Deconnexion</a>
-        @endauth
     </nav>
 </div>

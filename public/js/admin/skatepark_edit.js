@@ -16893,56 +16893,194 @@
 var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
 (() => {
-/*!*****************************!*\
-  !*** ./resources/js/map.js ***!
-  \*****************************/
+/*!**********************************************!*\
+  !*** ./resources/js/admin/skatepark_edit.js ***!
+  \**********************************************/
 __webpack_require__(/*! leaflet */ "./node_modules/leaflet/dist/leaflet-src.js");
 
 __webpack_require__(/*! leaflet.markercluster */ "./node_modules/leaflet.markercluster/dist/leaflet.markercluster-src.js");
 
-var map = L.map('map').setView([47.4724091, -0.6042191], 4);
+var map = L.map('location-selector').setView([46.227638, 2.213749], 6);
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-  minZoom: 3,
-  maxZoom: 14,
+  minZoom: 6,
+  maxZoom: 17,
   attribution: '© OpenStreetMap'
 }).addTo(map);
-var icon_scale = 0.7;
-var icon_size = {
-  w: 64 * icon_scale,
-  h: 32 * icon_scale
-};
-var icon = L.icon({
-  iconUrl: 'images/icons/ramp_icon.png',
-  iconSize: [icon_size.w, icon_size.h],
-  iconAnchor: [icon_size.w / 2, icon_size.h / 2],
-  popupAnchor: [0, -icon_size.h / 2]
+map.on('click', function (e) {
+  update_marker(e.latlng);
 });
-var markers = L.markerClusterGroup({
-  iconCreateFunction: function iconCreateFunction(cluster) {
-    return L.divIcon({
-      html: cluster.getChildCount(),
-      className: 'mapcluster',
-      iconSize: null
-    });
+var marker;
+
+function update_marker(coordinates) {
+  if (marker) map.removeLayer(marker);
+  marker = L.marker(coordinates);
+  map.addLayer(marker);
+  document.querySelector('#coordinates').value = [coordinates.lat, coordinates.lng].join(',');
+}
+
+var coordinates = document.querySelector('#coordinates');
+
+if (coordinates.value !== '') {
+  var coords = coordinates.value.split(',');
+  update_marker({
+    lat: coords[0],
+    lng: coords[1]
+  });
+} // Autocomplete
+
+
+var address_input = document.querySelector('#address');
+var address_autocomplete = document.querySelector('#address_autocomplete');
+address_autocomplete.classList.add('hidden');
+var address = address_input.value; // address_input.addEventListener('focusout', () => {
+//     console.log('focusout');
+//     if (!address_autocomplete.classList.contains('hidden'))
+//         address_autocomplete.classList.add('hidden');
+// })
+// let typingTimer;
+//
+// address_input.addEventListener('keyup', () => {
+//     clearTimeout(typingTimer);
+//     typingTimer = setTimeout(() => {
+//         console.log('Launch request now');
+//     }, 200);
+// })
+
+address_input.addEventListener('keydown', function (event) {
+  // clearTimeout(typingTimer);
+  address = event.target.value;
+
+  if (address_autocomplete.childElementCount <= 0) {
+    address_autocomplete.classList.add('hidden'); // address_autocomplete.style.display = 'none';
+  } else {
+    address_autocomplete.classList.remove('hidden'); // address_autocomplete.style.display = 'block';
   }
+
+  if (address === '') return;
+  var http = new XMLHttpRequest();
+  http.open('GET', "https://api-adresse.data.gouv.fr/search/?q=".concat(address));
+  http.send();
+
+  http.onload = function () {
+    var result = JSON.parse(http.response);
+    address_autocomplete.innerHTML = '';
+    result.features.sort(function (a, b) {
+      a = a.properties;
+      b = b.properties;
+      if (a.score > b.score) return 1;else if (a.score < b.score) return -1;
+      return 0;
+    }).forEach(function (feature) {
+      var properties = feature === null || feature === void 0 ? void 0 : feature.properties;
+      var li = document.createElement('li');
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      btn.appendChild(document.createTextNode(properties === null || properties === void 0 ? void 0 : properties.label));
+      btn.addEventListener('click', function () {
+        address_input.value = properties.name;
+        city.value = properties.city;
+        postcode.value = properties.postcode;
+        address_autocomplete.classList.add('hidden');
+        update_marker({
+          lat: feature.geometry.coordinates[1],
+          lng: feature.geometry.coordinates[0]
+        });
+      });
+      li.appendChild(btn);
+      address_autocomplete.appendChild(li);
+    });
+  };
+}); // Image
+
+var set_image = document.querySelector('#set_image');
+var image = document.querySelector('#image');
+var image_preview = document.querySelector('#image_preview');
+set_image.addEventListener('click', function () {
+  image.click();
 });
-var popup = L.popup();
-skateparks.forEach(function (skatepark) {
-  var coords = skatepark.coordinates.split(',');
-  var marker = L.marker(coords, {
-    icon: icon
-  }).bindPopup(popup, {
-    closeButton: true,
-    autoClose: true,
-    'className': 'map-popup'
+image.addEventListener('change', function (e) {
+  var file = e.target.files[0];
+  var fileReader = new FileReader();
+  fileReader.addEventListener('load', function () {
+    image_preview.src = this.result;
   });
-  marker.on('click', function (e) {
-    map.setView(e.latlng, 14);
-    popup.setLatLng(e.latlng).setContent("\n            <a href=\"skateparks/".concat(skatepark.slug, "\">\n                <img src=\"").concat(skatepark.image, "\" alt=\"Skate park ").concat(skatepark.title, "\" style=\"width: 100%\">\n                <span>").concat(skatepark.title, "</span>\n            </a>\n            ")).openOn(map);
+  fileReader.readAsDataURL(file);
+}); // Image Gallery
+
+var gallery_preview = document.querySelector('#gallery_preview');
+var gallery_input = document.querySelector('#gallery_input');
+var gallery_delete_container = document.querySelector('#gallery_delete_container');
+var add_gallery = document.querySelector('#add_gallery');
+var uploaded_files = [];
+var files_to_delete = [];
+
+if (medias != null) {
+  medias.forEach(function (media) {
+    addToGallery(media.name, media.original_url, media.id);
   });
-  markers.addLayer(marker);
+} // Permet de générer un objet FileList à partir d'un DataTransfer
+
+
+function getFileListItems(files) {
+  var transferObject = new DataTransfer();
+
+  for (var i = 0; i < files.length; i++) {
+    transferObject.items.add(files[i]);
+  }
+
+  return transferObject.files;
+}
+
+function addToGallery(name, src) {
+  var id = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : -1;
+  var container = document.createElement('div');
+  container.classList.add('w-100', 'h-100', 'p-relative');
+  var image = new Image();
+  image.classList.add('border-small', 'w-100', 'h-100', 'fit-cover');
+  image.title = name;
+  image.src = src;
+  var cross = document.createElement('button');
+  cross.type = 'button';
+  cross.classList.add('p-absolute', 'btn', 'btn-primary', 'btn-small', 't-0', 'l-0');
+  cross.append('x');
+
+  cross.onclick = function () {
+    container.remove();
+
+    if (id) {
+      files_to_delete.push(id);
+      console.log('files to delete', files_to_delete);
+      gallery_delete_container.value = files_to_delete;
+    } else {
+      uploaded_files = uploaded_files.filter(function (f) {
+        return f.name !== name;
+      });
+      gallery_input.files = getFileListItems(uploaded_files);
+    }
+  };
+
+  container.appendChild(image);
+  container.appendChild(cross);
+  gallery_preview.appendChild(container);
+}
+
+add_gallery.addEventListener('click', function () {
+  gallery_input.click();
 });
-map.addLayer(markers);
+
+gallery_input.onchange = function (e) {
+  [].forEach.call(e.target.files, read);
+
+  function read(file) {
+    var reader = new FileReader();
+    reader.addEventListener('load', function () {
+      uploaded_files.push(file);
+      console.log('uploaded_files', uploaded_files);
+      gallery_input.files = getFileListItems(uploaded_files);
+      addToGallery(file.name, this.result);
+    });
+    reader.readAsDataURL(file);
+  }
+};
 })();
 
 /******/ })()

@@ -1,0 +1,18 @@
+.header {
+    font-weight: 700;
+    text-transform: uppercase;
+    background-color: var(--header-bg-color);
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 10%;
+    z-index: -2;
+
+    &.sticky {
+        position: sticky;
+        width: 100%;
+        top: 0;
+        z-index: 99;
+    }
+}

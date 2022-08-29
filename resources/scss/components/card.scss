@@ -1,0 +1,48 @@
+.card {
+    overflow: hidden;
+    background-position: center;
+    background-size: cover;
+    border-radius: 10px;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-header {
+    border-radius: 10px 10px 0 0;
+    width: 100%;
+    background-position: center;
+    background-size: cover;
+    //height: 40%;
+}
+
+.card-body {
+    border-radius: 0 0 10px 10px;
+    background-color: var(--bg-white);
+    //height: 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    //padding: 2rem 3.5rem;
+}
+
+.card-title {
+    text-transform: uppercase;
+}
+
+.card-text {
+    color: var(--text-light);
+}
+
+.card-small {
+    overflow: hidden;
+    display: flex;
+    height: 200px;
+    width: 100%;
+    border-radius: 10px;
+    background-position: center;
+    background-size: cover;
+}

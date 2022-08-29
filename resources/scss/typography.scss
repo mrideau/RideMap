@@ -21,6 +21,10 @@ h3 {
     font-size: 1.25rem;
     text-transform: uppercase;
     margin-bottom: 1rem;
+
+    &:not(:first-child) {
+        margin-top: 0.5rem;
+    }
 }
 
 p {
@@ -31,6 +35,12 @@ p {
 a {
     font-family: 'Rubik';
     font-size: inherit;
+}
+
+.headline {
+    font-family: 'Bai Jamjuree';
+    font-weight: 700;
+    font-size: 2rem;
 }
 
 .section-title {

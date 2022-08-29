@@ -8,20 +8,12 @@
 @endpush
 
 @push('scripts')
-    <!-- Leaflet -->
-{{--    <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js"--}}
-{{--            integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ=="--}}
-{{--            crossorigin=""></script>--}}
-
-
     <script>
-        var events = @json($events->toArray());
-        var skateparcs = @json($skateparcs->toArray());
-        // window.data = 'test';
+        const skateparks = @json($skateparks);
     </script>
     <script src="{{ asset('js/map.js') }}" defer></script>
 @endpush
 
 @section('content')
-    <div id="map"></div>
+    <div id="map" class='map-popup'></div>
 @endsection

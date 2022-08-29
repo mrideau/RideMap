@@ -9,15 +9,43 @@ $utilities: (
             center: center,
         ),
     ),
+    'width': (
+        responsive: true,
+        property: width,
+        class: w,
+        values: (
+            25: 25%,
+            50: 50%,
+            100: 100%,
+        )
+    ),
     'max-width': (
         responsive: true,
         property: max-width,
-        class: max-width,
+        class: mw,
         values: (
             25: 25%,
             50: 50%,
             75: 75%,
         ),
+    ),
+    'height': (
+        responsive: true,
+        property: height,
+        class: h,
+        values: (
+            25: 25%,
+            50: 50%,
+            75: 75%,
+            100: 100%,
+        )
+    ),
+    'fit': (
+        property: object-fit,
+        class: fit,
+        values: (
+            cover: cover
+        )
     ),
     'justify-content': (
         responsive: true,
@@ -29,6 +57,14 @@ $utilities: (
             between: space-between,
             around: space-around,
             evenly: space-evenly,
+        ),
+    ),
+    'flex-direction': (
+        property: flex-direction,
+        class: flex,
+        values: (
+            column: column,
+            row: row,
         ),
     ),
     'align-items': (
@@ -47,14 +83,17 @@ $utilities: (
         values: (
             primary: var(--color-primary),
             danger: red,
-            success: green
+            success: green,
+            white: var(--text-white)
         )
     ),
-    'background-color': (
+    'bg-color': (
+        class: bg-color,
         property: background-color,
         values: (
             primary: var(--color-primary),
-            light: var(--bg-white)
+            light: var(--bg-white),
+            black: black
         ),
     ),
     'float': (
@@ -70,7 +109,50 @@ $utilities: (
         values: (
             none: none,
             block: block,
+            inline: inline,
+            flex: flex,
         )
+    ),
+    'border': (
+        property: border-radius,
+        class: border,
+        values: (
+            small: 5px
+        )
+    ),
+    'position': (
+        property: position,
+        class: p,
+        values: (
+            relative: relative,
+            absolute: absolute !important,
+        )
+    ),
+    'top': (
+        property: top,
+        class: t,
+        values: (
+            0: 0
+        ),
+    ),
+    'left': (
+        property: left,
+        class: l,
+        values: (
+            0: 0
+        ),
+    ),
+    'padding': (
+        responsive: true,
+        property: padding,
+        class: p,
+        values: $spacing
+    ),
+    'margin': (
+        responsive: true,
+        property: margin,
+        class: m,
+        values: map-merge($spacing, (auto: auto))
     )
 );
 

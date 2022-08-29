@@ -12,14 +12,14 @@
             <a href="" class="column-1">
                 <div class="card" style="background-image: url('/images/placeholder.jpg');">
                     <span>Carte des</span>
-                    <h3>Skate Parcs</h3>
+                    <h3 class="headline">Skate Parcs</h3>
                     <span class="btn btn-outline">Voir</span>
                 </div>
             </a>
             <div class="column-1">
                 <div class="card" style="background-image: url('/images/placeholder.jpg');">
                     <span>Carte des</span>
-                    <h3>Skate Parcs</h3>
+                    <h3 class="headline">Skate Parcs</h3>
                     <a href="" class="btn btn-outline">Voir</a>
                 </div>
             </div>

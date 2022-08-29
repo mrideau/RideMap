@@ -1,7 +1,7 @@
 require('leaflet');
 require('leaflet.markercluster');
 
-var map = L.map('map').setView([47.4724091, -0.6042191], 4);
+const map = L.map('map').setView([47.4724091, -0.6042191], 4);
 
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     minZoom: 3,
@@ -34,17 +34,26 @@ const markers = L.markerClusterGroup({
 
 const popup = L.popup();
 
-skateparcs.forEach(skateparc => {
-    const coords = skateparc.coordinates.split(',');
+skateparks.forEach(skatepark => {
+    const coords = skatepark.coordinates.split(',');
 
     const marker = L.marker(coords, {
         icon: icon
-    }).bindPopup(popup);
+    }).bindPopup(popup, {
+        closeButton: true,
+        autoClose: true,
+        'className' : 'map-popup'
+    });
 
     marker.on('click', function (e) {
         map.setView(e.latlng, 14);
         popup.setLatLng(e.latlng)
-            .setContent(skateparc.title)
+            .setContent(`
+            <a href="skateparks/${skatepark.slug}">
+                <img src="${skatepark.image}" alt="Skate park ${skatepark.title}" style="width: 100%">
+                <span>${skatepark.title}</span>
+            </a>
+            `)
             .openOn(map);
     });
 
@@ -52,5 +61,3 @@ skateparcs.forEach(skateparc => {
 });
 
 map.addLayer(markers);
-
-console.log(markers.getLayers())

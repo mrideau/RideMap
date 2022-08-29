@@ -9,14 +9,17 @@
                     <a href="{{ route('admin.dashboard') }}" class="nav-link">Accueil</a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('skate-parcs.index') }}" class="nav-link">Skate Parcs</a>
+                    <a href="{{ route('skateparks.index') }}" class="nav-link">Skate Parks</a>
                 </li>
             </ul>
         </nav>
         @hasSection('dashboard-content')
             @yield('dashboard-content')
         @else
-
+            <span>Bonjour {{ auth()->user()->name }} !</span>
+            <div>
+                <a class="btn btn-primary" href="{{ route('login.logout') }}">Deconnexion</a>
+            </div>
         @endif
     </div>
 @endsection
