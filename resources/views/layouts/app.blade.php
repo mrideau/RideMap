@@ -10,6 +10,7 @@
 
     <title>@yield('title', config('app.name', 'Ride Map'))</title>
     <meta nаmе="dеѕсrірtіоn" соntеnt="La carte qui référence les skates parcs en France.">
+    <link rel="icon" type="image/png" href="favicon.png">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
