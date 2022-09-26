@@ -9,6 +9,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>@yield('title', config('app.name', 'Ride Map'))</title>
+    <meta nаmе="dеѕсrірtіоn" соntеnt="La carte qui référence les skates parcs en France.">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -18,9 +19,6 @@
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 
     @stack('head')
-
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
 </head>
 
 <body>
@@ -33,6 +31,9 @@
     </div>
 
     @include('layouts.footer')
+
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}" defer></script>
 
     @stack('scripts')
 </body>

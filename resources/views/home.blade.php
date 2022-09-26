@@ -13,33 +13,24 @@
                 <p class="color-white">La carte qui référence les skates parcs en France.</p>
             </div>
         </section>
-        {{--        <div class="grid grid-lg-2">--}}
-        {{--            <a href="" class="column-1">--}}
-        {{--                <div class="card" style="background-image: url('/images/placeholder.jpg');">--}}
-        {{--                    <span>Carte des</span>--}}
-        {{--                    <h3 class="headline">Skate Parcs</h3>--}}
-        {{--                    <span class="btn btn-outline">Voir</span>--}}
-        {{--                </div>--}}
-        {{--            </a>--}}
-        {{--            <div class="column-1">--}}
-        {{--                <div class="card" style="background-image: url('/images/placeholder.jpg');">--}}
-        {{--                    <span>Carte des</span>--}}
-        {{--                    <h3 class="headline">Skate Parcs</h3>--}}
-        {{--                    <a href="" class="btn btn-outline">Voir</a>--}}
-        {{--                </div>--}}
-        {{--            </div>--}}
-        {{--        </div>--}}
 
         <section class="home_container" id="comment-ça-fonctionne">
             <h2 class="section-title">Comment ça fonctionne ?</h2>
             <p class="section-description">Rends toi sur <a href="/carte" class="color-primary text-underline">la carte</a>, clique sur les différentes icônes en forme de rampe pour apercevoir le skate parc.</p>
             <div class="grid grid-md-1 grid-lg-2">
                 <div class="column-1">
-                    <img class="card w-100 hover-zoom" src="{{ url('/images/tutos/tuto_1.jpg') }}"
+                    <img
+                        class="card w-100 hover-zoom"
+                        src="{{ url('/images/tutos/tuto_1.jpg') }}"
+                        alt="Tuto ridemap 1"
                     />
                 </div>
                 <div class="column-1">
-                    <img class="card w-100 hover-zoom" src="{{ url('/images/tutos/tuto_2.jpg') }}"/>
+                    <img
+                        class="card w-100 hover-zoom"
+                        src="{{ url('/images/tutos/tuto_2.jpg') }}"
+                        alt="Tuto ridemap 2"
+                    />
                 </div>
             </div>
         </section>

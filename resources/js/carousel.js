@@ -57,11 +57,3 @@ class Carousel {
         this.setIndex(this.currIndex - 1);
     }
 }
-
-const carousels = document.querySelectorAll('.carousel');
-carousels.forEach(carousel => {
-    const car = new Carousel(carousel);
-    // setInterval(() => {
-    //     car.next();
-    // }, 2000);
-});

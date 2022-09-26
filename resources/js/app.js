@@ -1,7 +1,5 @@
-const { testing } = require('laravel-mix/src/Log');
-
-require('./bootstrap');
+// require('./bootstrap');
 
 import './header';
 
-import './carousel';
+// import './carousel';
