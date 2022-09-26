@@ -2,85 +2,60 @@
 
 @section('content')
 
-    <!-- <section class="jumbotron">
-    <span>Ride Map</span>
-    <h1>Bienvenue</h1>
-</section> -->
-
     <div class="container-full">
-        <div class="grid grid-lg-2">
-            <a href="" class="column-1">
-                <div class="card" style="background-image: url('/images/placeholder.jpg');">
-                    <span>Carte des</span>
-                    <h3 class="headline">Skate Parcs</h3>
-                    <span class="btn btn-outline">Voir</span>
+        <section class="home_container hero_video">
+            <video autoplay muted loop id="home_video" poster="/images/video_poster.jpg">
+                <source src="videos/home.mp4" type="video/mp4">
+            </video>
+            <div class="overlay"></div>
+            <div class="content">
+                <h1 class="color-white">RIDE<span class="color-primary">MAP</span></h1>
+                <p class="color-white">La carte qui référence les skates parcs en France.</p>
+            </div>
+        </section>
+        {{--        <div class="grid grid-lg-2">--}}
+        {{--            <a href="" class="column-1">--}}
+        {{--                <div class="card" style="background-image: url('/images/placeholder.jpg');">--}}
+        {{--                    <span>Carte des</span>--}}
+        {{--                    <h3 class="headline">Skate Parcs</h3>--}}
+        {{--                    <span class="btn btn-outline">Voir</span>--}}
+        {{--                </div>--}}
+        {{--            </a>--}}
+        {{--            <div class="column-1">--}}
+        {{--                <div class="card" style="background-image: url('/images/placeholder.jpg');">--}}
+        {{--                    <span>Carte des</span>--}}
+        {{--                    <h3 class="headline">Skate Parcs</h3>--}}
+        {{--                    <a href="" class="btn btn-outline">Voir</a>--}}
+        {{--                </div>--}}
+        {{--            </div>--}}
+        {{--        </div>--}}
+
+        <section class="home_container" id="comment-ça-fonctionne">
+            <h2 class="section-title">Comment ça fonctionne ?</h2>
+            <p class="section-description">Rends toi sur <a href="/carte" class="color-primary text-underline">la carte</a>, clique sur les différentes icônes en forme de rampe pour apercevoir le skate parc.</p>
+            <div class="grid grid-md-1 grid-lg-2">
+                <div class="column-1">
+                    <img class="card w-100 hover-zoom" src="{{ url('/images/tutos/tuto_1.jpg') }}"
+                    />
                 </div>
-            </a>
-            <div class="column-1">
-                <div class="card" style="background-image: url('/images/placeholder.jpg');">
-                    <span>Carte des</span>
-                    <h3 class="headline">Skate Parcs</h3>
-                    <a href="" class="btn btn-outline">Voir</a>
+                <div class="column-1">
+                    <img class="card w-100 hover-zoom" src="{{ url('/images/tutos/tuto_2.jpg') }}"/>
                 </div>
             </div>
-        </div>
-
-        <section>
-            @if($events->count() > 0)
-                <h2 class="section-title">Prochains Évènements</h2>
-                <p class="section-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore, quod
-                    suscipit. Sint voluptate ad sequi blanditiis porro dolore? Quia quo consectetur provident optio ab!
-                    Dicta est non sapiente a autem?</p>
-                <div class="grid grid-md-2 grid-lg-4">
-                    <div class="column-md-2">
-                        <a href="" class="card text-right justify-content-end"
-                           style="background-image: url('/images/placeholder.jpg');">
-                            <span>{{ $events[0]->city }}</span>
-                            <h3>{{ $events[0]->title }}</h3>
-                        </a>
-                    </div>
-                    @if($events->count() > 1)
-                        <div class="column-1">
-                            <a href="" class="card-small" style="background-image: url('/images/placeholder.jpg');">
-                            </a>
-                        </div>
-                    @endif
-                    @if($events->count() > 2)
-                        <div class="column-1">
-                            <a href="" class="card-small" style="background-image: url('/images/placeholder.jpg');">
-                            </a>
-                        </div>
-                    @endif
-                </div>
-            @else
-                <p>No events</p>
-            @endif
         </section>
 
-        <section>
+        <section class="home_container">
             <h2 class="section-title">Partenaires</h2>
-            <p class="section-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex debitis
-                necessitatibus, sapiente obcaecati qui nostrum iure, cum vero molestiae cumque odit quae mollitia hic.
-                Tempora deserunt non sapiente iste doloremque!</p>
-            <div class="grid grid-lg-2">
-                <div class="column-1">
-                    <div class="card">
-                        <div class="card-header" style="background-image: url('/images/placeholder.jpg');"></div>
-                        <div class="card-body text-center">
-                            <h3 class="card-title">Lorem Ipsum</h3>
-                            <p class="card-text">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Perspiciatis
-                                reiciendis consequuntur ipsum accusamus quo, autem a enim animi porro dignissimos
-                                inventore corrupti doloribus! Culpa illum quo sit quam quod cupiditate.</p>
-                            <a href="" class="btn btn-primary">Voir</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="column-1">
-                    <div class="card" style="background-image: url('/images/placeholder.jpg');">
-                    </div>
-                </div>
+            <p class="section-description">Ils nous soutiennent pour permettre de vous proposer la meilleure expérience
+                possible.</p>
+            <div class="sponsor-container bg-color-black">
+                @foreach($sponsors as $sponsor)
+                    <a class="sponsor-link" href="{{ $sponsor->website_url }}" target="_blank">
+                        <img class="sponsor-logo hover-zoom" src="{{ $sponsor->getFirstMediaUrl('logo') }}"
+                             alt="Logo {{ $sponsor->name }}">
+                    </a>
+                @endforeach
             </div>
         </section>
-
     </div>
 @endsection

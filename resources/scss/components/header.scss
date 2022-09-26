@@ -1,18 +1,101 @@
 .header {
+    position: relative;
     font-weight: 700;
     text-transform: uppercase;
     background-color: var(--header-bg-color);
     height: 100px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
     padding: 0 10%;
-    z-index: -2;
+    z-index: 9999;
+    gap: 2rem;
+    box-shadow: 2px 0px 4px rgba(#000000, 0.2);
 
     &.sticky {
         position: sticky;
         width: 100%;
         top: 0;
-        z-index: 99;
+        left: 0;
+    }
+
+    .nav-brand {
+        font-family: 'Bai Jamjuree', sans-serif;
+        font-style: italic;
+        font-weight: 700;
+        font-size: 2rem;
+
+        //&:hover {
+        //    > * {
+        //        display: inline-block;
+        //        transition: 500ms ease-in-out;
+        //
+        //        &:nth-child(1) {
+        //            transform: translateY(-5px);
+        //        }
+        //
+        //        &:nth-child(2) {
+        //            transform: translateY(5px);
+        //        }
+        //    }
+        //}
+    }
+
+    .burger-menu {
+        display: none;
+        cursor: pointer;
+        gap: 4px;
+        flex-direction: column;
+
+        .bar {
+            background-color: var(--color-primary);
+            display: block;
+            width: 20px;
+            height: 2px;
+            transition: 200ms ease-in-out;
+        }
+
+        &.active {
+            .bar {
+                &:nth-child(1) {
+                    transform: rotate(45deg) translate(5px, 4px);
+                }
+
+                &:nth-child(2) {
+                    opacity: 0;
+                }
+
+                &:nth-child(3) {
+                    transform: rotate(-45deg) translate(4px, -4px);
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .burger-menu {
+        display: flex!important;
+    }
+
+    .header {
+        justify-content: space-between;
+    }
+
+    .navbar {
+        border-top: 1px solid var(--color-primary);
+        position: absolute;
+        left: 0;
+        top: 100px;
+        width: 100%;
+        padding: 1rem;
+        background-color: var(--header-bg-color);
+
+        .nav-menu {
+            flex-direction: column;
+        }
+
+        &:not(.active) {
+            display: none;
+        }
     }
 }

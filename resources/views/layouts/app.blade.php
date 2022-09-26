@@ -28,6 +28,10 @@
 
     @yield('content')
 
+    <div class="btn_to_top">
+        <img src="{{ asset('images/icons/arrow-up.svg') }}" class="icon">
+    </div>
+
     @include('layouts.footer')
 
     @stack('scripts')

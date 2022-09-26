@@ -1,13 +1,15 @@
 .container-full {
-    max-width: 100%;
-    padding: 30px;
+    width: 100%;
+    padding: 2%;
 }
 
 .container {
     display: block;
-    max-width: calc(100% - 100px);
-    min-height: 100%;
+    //max-width: calc(100% - 100px);
+    //min-height: 100%;
+    //margin: 50px auto;
+    margin-inline: auto;
+    width: min(100%, 1200px);
     padding: 1.5rem;
-    margin: 50px auto;
     background-color: var(--bg-white);
 }

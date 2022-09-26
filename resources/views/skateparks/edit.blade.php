@@ -76,7 +76,7 @@
             <div class="column-4">
                 <label class="form-label" for="coordinates">Localisation<span
                         class="color-primary">*</span></label>
-                <x-map class="border-small" name="location-selector" script="none"></x-map>
+                <x-map class="border-small" name="location-selector"></x-map>
                 <input type="hidden" name="coordinates" id="coordinates"
                        value="{{ $skatepark->coordinates ?? old('coordinates') }}">
             </div>

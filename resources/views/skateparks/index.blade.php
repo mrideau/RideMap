@@ -6,9 +6,14 @@
             {{ session()->get('success') }}
         </div>
     @endif
-    <div>
+    <div class="d-flex justify-content-between">
+        <form class="form-input-group" action="{{ route('skateparks.index') }}" method="get" role="search">
+            <input class="form-input" type="text" name="skatepark" placeholder="Nom du skatepark" value="{{ $req ?? old('skatepark') }}">
+            <button class="btn btn-primary" type="submit" title="Chercher skatepark">Chercher</button>
+        </form>
         <a class="btn btn-primary" href="{{ route('skateparks.create') }}">Ajouter un Skate Parc</a>
     </div>
+
     <div class="grid grid-3">
         @foreach($skateparks as $skatepark)
             <a class="card-small flex-column column-3 column-md-1"
@@ -22,4 +27,5 @@
             </a>
         @endforeach
     </div>
+    {{ $skateparks->links('vendor.pagination.default') }}
 @endsection

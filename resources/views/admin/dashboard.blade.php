@@ -11,6 +11,9 @@
                 <li class="nav-item">
                     <a href="{{ route('skateparks.index') }}" class="nav-link">Skate Parks</a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{ route('sponsors.index') }}" class="nav-link">Partenaires</a>
+                </li>
             </ul>
         </nav>
         @hasSection('dashboard-content')

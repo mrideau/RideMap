@@ -7,13 +7,21 @@ use App\Models\SkatePark;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class SkateParkController extends Controller
 {
     public function index()
     {
-        $skateparks = SkatePark::all();
-        return view('skateparks.index', compact('skateparks'));
+        $skateparks = SkatePark::query();
+        $req = request('skatepark');
+
+        if ($req) {
+            $skateparks->where('title', 'Like', '%' . $req . '%');
+        }
+
+        $skateparks = $skateparks->orderBy('title', 'ASC')->paginate();
+        return view('skateparks.index', compact('skateparks', 'req'));
     }
 
     public function create() {
@@ -69,6 +77,7 @@ class SkateParkController extends Controller
         return redirect()->route('skateparks.index')->with('success', 'Skatepark supprimé avec succès.');
     }
 
+    // Fonction pour sauvegarder (créer/éditer) un skatepark
     function saveSkatepark(SkateparkRequest $request, SkatePark $skatepark) {
         if ($request->hasFile('image')) {
             $filename = trim($request->image->getClientOriginalName());
@@ -84,12 +93,23 @@ class SkateParkController extends Controller
 
         if (isset($request->galleryDelete[0])) {
             foreach (explode(',', $request->galleryDelete[0]) as $image_id) {
-//                print_r($image_id);
                 $skatepark->deleteMedia($image_id);
             }
         }
 
-        $skatepark->slug = Str::slug($request->title);
+        $slug = Str::slug($request->title);
+
+        // Associer le nouveau slug aux medias pour conserver le lien au modèle
+        if ($skatepark->slug !== $slug) {
+            $medias = Media::all()->where('model_id', '=', $skatepark->slug);
+
+            foreach ($medias as $media) {
+                $media->model_id = $slug;
+                $media->save();
+            }
+        }
+
+        $skatepark->slug = $slug;
         $skatepark->title = $request->title;
         $skatepark->description = $request->description;
         $skatepark->address = $request->address;
@@ -97,9 +117,7 @@ class SkateParkController extends Controller
         $skatepark->postcode = $request->postcode;
         $skatepark->coordinates = $request->coordinates;
 
-        // Save into database
+        // Sauvegarde dans la base de données
         $skatepark->save();
-
-//        Post::create(array_merge($request->all(), ['image_url' => $filename]));
     }
 }

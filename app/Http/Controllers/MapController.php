@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class MapController extends Controller
 {
     public function index() {
-        $skateparks = SkatePark::all(['title', 'slug', 'city', 'coordinates'])->all();
+        $skateparks = SkatePark::all(['title', 'slug', 'city', 'coordinates', 'description'])->all();
 
         foreach ($skateparks as $skatepark) {
             $skatepark->image = $skatepark->getFirstMediaUrl('image');

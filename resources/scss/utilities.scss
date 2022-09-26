@@ -148,11 +148,30 @@ $utilities: (
         class: p,
         values: $spacing
     ),
+    'padding-x': (
+        responsive: true,
+        property: padding-left padding-right,
+        class: px,
+        values: $spacing
+    ),
     'margin': (
         responsive: true,
         property: margin,
         class: m,
         values: map-merge($spacing, (auto: auto))
+    ),
+    'margin-x': (
+        responsive: true,
+        property: margin-left margin-right,
+        class: mx,
+        values: map-merge($spacing, (auto: auto))
+    ),
+    'text': (
+        property: text-decoration,
+        class: text,
+        values: (
+            underline: underline,
+        )
     )
 );
 

@@ -13,6 +13,10 @@ const mix = require("laravel-mix");
 
 mix.js("resources/js/app.js", "public/js");
 mix.js("resources/js/map.js", "public/js");
+
+mix.js("resources/js/components/map.js", "public/js/components");
+
 mix.js("resources/js/admin/skatepark_edit.js", "public/js/admin");
+mix.js("resources/js/skatepark_show.js", "public/js");
 
 mix.sass("resources/scss/app.scss", "public/css");

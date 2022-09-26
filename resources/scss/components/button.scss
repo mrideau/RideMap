@@ -57,3 +57,39 @@
     //     }
     // }
 }
+
+.btn_to_top {
+    z-index: 999;
+    width: 40px;
+    height: 40px;
+    background-color: var(--bg-top-btn);
+    position: fixed;
+    right: 30px;
+    bottom: 30px;
+    cursor: pointer;
+    justify-content: center;
+    align-items: center;
+    border-radius: 2px;
+    display: flex;
+    visibility: hidden;
+    opacity: 0;
+    transition: 0.5s;
+
+    .icon {
+        transform: translateY(-1px);
+        transition: 0.2s;
+    }
+
+    &.active {
+        //display: flex;
+        visibility: visible;
+        opacity: 1;
+    }
+
+    &:hover {
+
+        .icon {
+            transform: translateY(-3px);
+        }
+    }
+}

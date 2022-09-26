@@ -1,26 +1,34 @@
-require('leaflet');
-require('leaflet.markercluster');
+// require('leaflet');
+// require('leaflet.markercluster');
+//
+// var map = L.map('location-selector').setView([46.227638, 2.213749], 6);
+//
+// L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+//     minZoom: 6,
+//     maxZoom: 17,
+//     attribution: '© OpenStreetMap'
+// }).addTo(map);
+//
+// map.on('click', (e) => {
+//     update_marker(e.latlng);
+// })
+//
 
-var map = L.map('location-selector').setView([46.227638, 2.213749], 6);
+import InteractiveMap from "../components/map";
 
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    minZoom: 6,
-    maxZoom: 17,
-    attribution: '© OpenStreetMap'
-}).addTo(map);
+const map = new InteractiveMap('location-selector');
 
-map.on('click', (e) => {
+map.onclick = (e) => {
     update_marker(e.latlng);
-})
+}
 
 let marker;
 
 function update_marker(coordinates) {
     if(marker)
-        map.removeLayer(marker);
+        marker.remove();
 
-    marker = L.marker(coordinates);
-    map.addLayer(marker)
+    marker = map.addMarker(coordinates)
     document.querySelector('#coordinates').value = [coordinates.lat, coordinates.lng].join(',');
 }
 
@@ -38,24 +46,13 @@ const address_autocomplete = document.querySelector('#address_autocomplete');
 address_autocomplete.classList.add('hidden');
 
 let address = address_input.value;
-
-// address_input.addEventListener('focusout', () => {
-//     console.log('focusout');
-//     if (!address_autocomplete.classList.contains('hidden'))
-//         address_autocomplete.classList.add('hidden');
-// })
-
-// let typingTimer;
-//
-// address_input.addEventListener('keyup', () => {
-//     clearTimeout(typingTimer);
-//     typingTimer = setTimeout(() => {
-//         console.log('Launch request now');
-//     }, 200);
-// })
+let lastType;
 
 address_input.addEventListener('keydown', (event) => {
-    // clearTimeout(typingTimer);
+    const millis = Date.now() - lastType;
+    lastType = Date.now();
+    if (millis < 100)
+        return;
 
     address = event.target.value;
 
